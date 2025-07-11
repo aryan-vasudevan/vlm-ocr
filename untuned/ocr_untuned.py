@@ -38,7 +38,7 @@ while cap.isOpened():
         break
 
     if current_frame in frame_indices:
-        # Save frame as JPEG
+        # Save frame as jpg
         frame_path = f"dump/frame_{frame_id}_{time.time()}.jpg"
         cv2.imwrite(frame_path, frame)
 

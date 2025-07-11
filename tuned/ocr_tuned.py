@@ -17,8 +17,6 @@ client = InferenceHTTPClient(
     api_key=os.getenv("API_KEY")
 )
 
-# Regex pattern to find Assistant numbers
-pattern = re.compile(r"Assistant:\s*([0-9]+)")
 player_set = set()
 
 # Load video and determine frames
@@ -38,7 +36,7 @@ while cap.isOpened():
         break
 
     if current_frame in frame_indices:
-        # Save frame as JPEG
+        # Save frame as jpg
         frame_path = f"dump/frame_{frame_id}_{time.time()}.jpg"
         cv2.imwrite(frame_path, frame)
 
@@ -53,10 +51,7 @@ while cap.isOpened():
 
         # Extract player numbers
         for res in result[0]["smol_vlm"]:
-            m = pattern.search(res)
-            if m:
-                number = m.group(1)
-                player_set.add(number)
+            player_set.add(res)
 
         frame_id += 1
 
